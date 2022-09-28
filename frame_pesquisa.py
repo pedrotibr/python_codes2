@@ -687,7 +687,7 @@ class Frame2(wx.Frame):
             if remove:
                     num = str(self.editcod.GetValue())
                
-                    cursor.execute("delete from nomes2 where id_codigo= %s",[num])
+                    cursor.execute("delete from TABLE4 where id_codigo= %s",[num])
                     db.commit()
 
                     self.Onant(0)
