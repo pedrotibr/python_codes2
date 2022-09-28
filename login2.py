@@ -37,7 +37,7 @@ import frame_cadastro
 import frame_pesquisa
 
 import MySQLdb 
-db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="projeto_pillar")
+db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 cursor = db.cursor()
 
     
@@ -147,7 +147,7 @@ class MainFrame(wx.Frame):
         fileMenu3 = wx.Menu()
 
        
-        cadpaciente = fileMenu.Append(ID_ALUNOS, 'Cadastro', 'Clique para cadastrar pacientes') 
+        cadpaciente = fileMenu.Append(ID_ALUNOS, 'Cadastro', 'Clique para cadastrar') 
         
         #cadprofessores = fileMenu.Append(ID_PROFESSORES, 'Professores', 'Clique para cadastrar alunos')
         
@@ -193,7 +193,7 @@ class MainFrame(wx.Frame):
         
         
         icon = wx.Icon()
-        icon.CopyFromBitmap(wx.Bitmap("/home/pmesquita/Área de Trabalho/github_cadastro_consulta_impressao/python_codes-main/logo.ico", wx.BITMAP_TYPE_ANY))
+        icon.CopyFromBitmap(wx.Bitmap("./logo.ico", wx.BITMAP_TYPE_ANY))
         self.SetIcon(icon)
         
   
@@ -211,7 +211,7 @@ class MainFrame(wx.Frame):
         
         self.SetPosition((250,75))
  
-        bitmap = wx.Bitmap("/home/pmesquita/Área de Trabalho/github_cadastro_consulta_impressao/python_codes-main/logo.ico")
+        bitmap = wx.Bitmap("./logo.ico")
         bitmap = self.scale_bitmap(bitmap, 250, 240)
         control = wx.StaticBitmap(self, -1, bitmap)
         control.SetPosition((10,10))

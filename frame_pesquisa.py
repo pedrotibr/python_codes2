@@ -94,7 +94,7 @@ class Frame2(wx.Frame):
         self.btn_imprimir.Bind(wx.EVT_BUTTON, self.seleciona_tipo_impressao)
 
         icon = wx.Icon()
-        icon.CopyFromBitmap(wx.Bitmap("/home/pmesquita/Área de Trabalho/github_cadastro_consulta_impressao/python_codes-main/logo.ico", wx.BITMAP_TYPE_ANY))
+        icon.CopyFromBitmap(wx.Bitmap("./logo.ico", wx.BITMAP_TYPE_ANY))
         self.SetIcon(icon)
         
         self.Bind(wx.EVT_CLOSE, self.OnClose)
@@ -125,12 +125,10 @@ class Frame2(wx.Frame):
     def OnSelected(self, evt):
 
 
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="projeto_pillar")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
         cursor1 = db.cursor()
         
         nova_data=self.edit_nova_data.GetValue()
-        
-        print("\nOnSelected", self.listctrl1.GetSelectedItemCount())
 
         dialog = wx.MessageDialog(self,("Confirmar alterar data dos registros selecionados?"),("Confirma"),
                                       wx.YES_NO | wx.ICON_QUESTION)
@@ -169,13 +167,11 @@ class Frame2(wx.Frame):
 
              
         
-                cursor1.execute('UPDATE AGENDA SET data_agendamento = "'+nova_data+'" WHERE sessoes = %s and data_agendamento = %s and heaa = %s',[sessoes, data_, heaa])
+                cursor1.execute('UPDATE TABLE1 SET data_agendamento = "'+nova_data+'" WHERE sessoes = %s and data_agendamento = %s and heaa = %s',[sessoes, data_, heaa])
                 db.commit()
    
                 item = self.listctrl1.GetNextSelected(item)
      
-        
-            print("sessoes: "+sessoes+"data: "+data_+"heaa: "+heaa)
 
             self.Onconsultar_nova_data()
             
@@ -310,8 +306,7 @@ class Frame2(wx.Frame):
         
     def frame_cadastro(self, event):
       
-        print("\nOnSelected", self.listctrl1.GetSelectedItemCount())
-
+        
         item = self.listctrl1.GetFirstSelected()
   
         self.confirma=1
@@ -366,7 +361,7 @@ class Frame2(wx.Frame):
         
     def Onconsultar(self,e):
         
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="projeto_pillar")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
         cursor = db.cursor()
         cursor2 = db.cursor()
   
@@ -374,7 +369,7 @@ class Frame2(wx.Frame):
         
         data = (self.edit_data.GetValue())
         
-        numrows=cursor2.execute('select * from projeto_pillar.AGENDA where data_agendamento like "%'+data+'%"')
+        numrows=cursor2.execute('select * from database.TABLE1 where data_agendamento like "%'+data+'%"')
         
         row=cursor2.fetchone()
         
@@ -389,7 +384,7 @@ class Frame2(wx.Frame):
             
             crm = (str(row[3]))
             
-            numrows=cursor.execute('select * from projeto_pillar.CLIENTES where HEAA like "%'+heaa+'%"')
+            numrows=cursor.execute('select * from database.TABLE2 where HEAA like "%'+heaa+'%"')
             row2=cursor.fetchone()
 
             print(row2)
@@ -409,7 +404,7 @@ class Frame2(wx.Frame):
 
     def Onconsultar_nova_data(self):
 
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="projeto_pillar")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
         cursor = db.cursor()
         cursor2 = db.cursor()
         
@@ -417,7 +412,7 @@ class Frame2(wx.Frame):
                 
         data = (self.edit_nova_data.GetValue())
         
-        numrows=cursor2.execute('select * from projeto_pillar.AGENDA where data_agendamento like "%'+data+'%"')
+        numrows=cursor2.execute('select * from database.TABLE1 where data_agendamento like "%'+data+'%"')
         
         row=cursor2.fetchone()
         
@@ -432,12 +427,12 @@ class Frame2(wx.Frame):
             
             crm = (str(row[3]))
             
-            numrows=cursor.execute('select * from projeto_pillar.CLIENTES where HEAA = %s',[heaa])
+            numrows=cursor.execute('select * from database.TABLE2 where HEAA = %s',[heaa])
             row2=cursor.fetchone()
             
-            print("row2 "+str(row2))
             
-            numrows=cursor.execute('select * from projeto_pillar.FISIOTERAPEUTAS where CRM = %s',[crm])
+            
+            numrows=cursor.execute('select * from database.TABLE3 where CRM = %s',[crm])
             row3=cursor.fetchone()
             
     
@@ -630,10 +625,6 @@ class Frame2(wx.Frame):
     
     def Onprint(self, e,tipo):
        
-        
-         
-        print("\nOnSelected", self.listctrl1.GetSelectedItemCount())
-
 
         self.confirma=1
 
@@ -677,9 +668,7 @@ class Frame2(wx.Frame):
 
 
         c.showPage()
-        
-       
-        
+
         c.save()
         
         os.system("evince /tmp/arquivo.pdf&") 
@@ -687,7 +676,7 @@ class Frame2(wx.Frame):
 
     def Ondelete(self, e):
        
-            db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="projeto_pillar")
+            db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
             cursor = db.cursor()
     
             dialog = wx.MessageDialog(self,("Você quer realmente deletar esse registro?"),("Confirma exclusão"),
@@ -697,17 +686,12 @@ class Frame2(wx.Frame):
 
             if remove:
                     num = str(self.editcod.GetValue())
-                    print (num)
-                    print (type(num))
+               
                     cursor.execute("delete from nomes2 where id_codigo= %s",[num])
                     db.commit()
 
                     self.Onant(0)
-                    
-                    
-                    
-                
-                
+
             e.Skip()    
         
         

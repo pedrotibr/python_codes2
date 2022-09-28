@@ -265,7 +265,7 @@ class Framew1(wx.Frame):
         
     def find_user(self,user):
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
         cursor = db.cursor()
         
         cursor.execute('select * from database.TABLE2 where nome like "%'+user+'%"')
@@ -306,7 +306,7 @@ class Framew1(wx.Frame):
             
     def find_user_heaa(self,heaa):
         
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
         cursor = db.cursor()
         
         cursor.execute('select * from TABLE2 where heaa like "%'+heaa+'%"')
@@ -453,7 +453,7 @@ class Framew1(wx.Frame):
         
     def Onconsultar(self, e):
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
         
         cursor = db.cursor()
         
@@ -464,7 +464,7 @@ class Framew1(wx.Frame):
         
        
           
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
         
@@ -493,12 +493,12 @@ class Framew1(wx.Frame):
         self.a1=self.cod_curso.GetValue() 
    
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
         
         
-        cursor.execute('select * from CLIENTES where nome like "%'+self.a1+'%"')
+        cursor.execute('select * from TABLE2 where nome like "%'+self.a1+'%"')
         
         row=cursor.fetchone()  
   
@@ -553,7 +553,7 @@ class Framew1(wx.Frame):
     def Onprint(self, e):
           
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
         
@@ -586,11 +586,11 @@ class Framew1(wx.Frame):
         num = str(self.edit_prontuario.GetValue())
         
         
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
   
-        cursor.execute("select * from projeto_pillar.TABLE1 where codigo > (%s) order by codigo ASC", [num])
+        cursor.execute("select * from database.TABLE2 where codigo > (%s) order by codigo ASC", [num])
         
         row= cursor.fetchone()
  
@@ -645,7 +645,7 @@ class Framew1(wx.Frame):
     def last(self):
         
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
    
@@ -659,7 +659,7 @@ class Framew1(wx.Frame):
     def first(self):
         
         
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
         
@@ -674,7 +674,7 @@ class Framew1(wx.Frame):
         
     def Onant(self, e): 
               
-        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="localhost",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
         
@@ -745,7 +745,7 @@ class Framew1(wx.Frame):
     def Onlast(self,e): 
           
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
   
@@ -803,12 +803,12 @@ class Framew1(wx.Frame):
             
     def Onfirst(self,e): 
         
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
   
         
-        cursor.execute("select * from DATABASE.TABLE2 order by codigo ASC")
+        cursor.execute("select * from database.TABLE2 order by codigo ASC")
         row=cursor.fetchone() 
             
         self.edit_prontuario.SetValue(str(row[0]))        
@@ -860,7 +860,7 @@ class Framew1(wx.Frame):
 
     def Onsalvar(self, e):
  
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
         cursor = db.cursor()
  
@@ -949,7 +949,7 @@ class Framew1(wx.Frame):
         if (self.edit == True):# and (status_cpf) and (status_rg):
                        
            
-            cursor.execute('UPDATE CLIENTES SET nome = "'+nome+'", endereco = "'+endereco+'", bairro = "'+bairro+'", cidade = "'+cidade+'",estado = "'+estado+'",cep = "'+cep+'", telefone1 = "'+telefone+'", telefone2 = "'+celular+'", nascimento = "'+nascimento+'", rg = "'+rg+'", emissor = "'+orgao_emissor+'",cpf = "'+cpf+'",pai = "'+pai+'",mae = "'+mae+'",profissao = "'+profissao+'", data = "'+data+'", fotografia = "'+fotografia+'",cns = "'+cns+'", heaa = "'+heaa+'"  where "'+codigo+'" = codigo' )
+            cursor.execute('UPDATE TABLE2 SET nome = "'+nome+'", endereco = "'+endereco+'", bairro = "'+bairro+'", cidade = "'+cidade+'",estado = "'+estado+'",cep = "'+cep+'", telefone1 = "'+telefone+'", telefone2 = "'+celular+'", nascimento = "'+nascimento+'", rg = "'+rg+'", emissor = "'+orgao_emissor+'",cpf = "'+cpf+'",pai = "'+pai+'",mae = "'+mae+'",profissao = "'+profissao+'", data = "'+data+'", fotografia = "'+fotografia+'",cns = "'+cns+'", heaa = "'+heaa+'"  where "'+codigo+'" = codigo' )
             
             db.commit()
             row=cursor.fetchone()
@@ -1065,7 +1065,7 @@ class Framew1(wx.Frame):
     def Ondelete(self, e):
             
         
-            db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
+            db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="database")
 
             cursor = db.cursor()
        
