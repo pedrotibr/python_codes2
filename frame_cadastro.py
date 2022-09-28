@@ -204,7 +204,7 @@ class Framew1(wx.Frame):
         self.new=False
    
         icon = wx.Icon()
-        icon.CopyFromBitmap(wx.Bitmap("/home/pmesquita/Área de Trabalho/github_cadastro_consulta_impressao/python_codes-main/logo.ico", wx.BITMAP_TYPE_ANY))
+        icon.CopyFromBitmap(wx.Bitmap("./logo.ico", wx.BITMAP_TYPE_ANY))
         self.SetIcon(icon)
         
         self.Bind(wx.EVT_CLOSE, self.OnClose)
@@ -649,7 +649,7 @@ class Framew1(wx.Frame):
 
         cursor = db.cursor()
    
-        cursor.execute("select * from CLIENTES order by codigo DESC")
+        cursor.execute("select * from TABLE2 order by codigo DESC")
         row= cursor.fetchone()
 
         db.close()
@@ -663,7 +663,7 @@ class Framew1(wx.Frame):
 
         cursor = db.cursor()
         
-        cursor.execute("select * from CLIENTES order by codigo ASC")
+        cursor.execute("select * from TABLE2 order by codigo ASC")
         row= cursor.fetchone()
         
      
@@ -681,7 +681,7 @@ class Framew1(wx.Frame):
         
         num = str(self.edit_prontuario.GetValue())
         
-        cursor.execute("select * from CLIENTES where codigo < (%s) order by codigo DESC", [num])
+        cursor.execute("select * from TABLE2 where codigo < (%s) order by codigo DESC", [num])
         
         row= cursor.fetchone()
     
@@ -751,7 +751,7 @@ class Framew1(wx.Frame):
   
         num = str(int(cursor.rowcount))
          
-        cursor.execute("select * from CLIENTES order by codigo DESC")
+        cursor.execute("select * from TABLE2 order by codigo DESC")
         
         row= cursor.fetchone()
         numrows = int(cursor.rowcount)
@@ -808,7 +808,7 @@ class Framew1(wx.Frame):
         cursor = db.cursor()
   
         
-        cursor.execute("select * from projeto_pillar.CLIENTES order by codigo ASC")
+        cursor.execute("select * from DATABASE.TABLE2 order by codigo ASC")
         row=cursor.fetchone() 
             
         self.edit_prontuario.SetValue(str(row[0]))        
@@ -860,7 +860,7 @@ class Framew1(wx.Frame):
 
     def Onsalvar(self, e):
  
-        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="projeto_pillar")
+        db=MySQLdb.connect(host="127.0.0.1",port=3306,user="user",passwd="password",db="DATABASE")
 
         cursor = db.cursor()
  
